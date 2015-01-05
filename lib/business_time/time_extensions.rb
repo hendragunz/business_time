@@ -32,8 +32,20 @@ module BusinessTime
       # True if this time is on a workday (between 00:00:00 and 23:59:59), even if
       # this time falls outside of normal business hours.
       def workday?(day)
-        Time.weekday?(day) &&
-          !BusinessTime::Config.holidays.include?(day.to_date)
+        # is work date
+        BusinessTime::Config.work_dates.each do |d|
+          return true if Date.parse(d) == day.to_date
+        end
+        # is holiday
+        isholiday = BusinessTime::Config.holidays.each do |holiday|
+          h = Date.parse(holiday[:date])
+          if holiday[:repeat]
+            return false if h.day == day.day and h.month == h.month
+          else
+            return false if h == day.to_date
+          end
+        end
+        return Time.weekday?(day)
       end
 
       # True if this time falls on a weekday.

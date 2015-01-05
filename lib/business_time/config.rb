@@ -15,6 +15,7 @@ module BusinessTime
       work_hours_total:      {},
       _weekdays:             nil,
       zone:                  Time.zone.present? ? Time.zone.name : 'UTC',
+      work_dates:            [],
     }
 
     class << self
@@ -60,6 +61,7 @@ module BusinessTime
     # by saying
     #   BusinessTime::Config.holidays << my_holiday_date_object
     # someplace in the initializers of your application.
+    # format: [{:name=>"Indepedence Day", :date=>"01/10/2014", :repeat => true}, {:name=>"New Year", :date=>"01/01/2015", :repeat => true}]
     threadsafe_cattr_accessor :holidays
 
     # working hours for each day - if not set using global variables :beginning_of_workday
@@ -70,6 +72,9 @@ module BusinessTime
     
     # specify Time.zone
     threadsafe_cattr_accessor :zone
+
+    # specify work date
+    threadsafe_cattr_accessor :work_dates
 
     # total work hours for a day. Never set, always calculated.
     threadsafe_cattr_accessor :work_hours_total
@@ -130,7 +135,7 @@ module BusinessTime
         end
 
         (config["holidays"] || []).each do |holiday|
-          holidays << Date.parse(holiday)
+          holidays << {date: holiday, name: 'Holiday', repeat: true}
         end
       end
 
