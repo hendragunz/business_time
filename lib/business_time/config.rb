@@ -14,7 +14,7 @@ module BusinessTime
       work_hours:            {},
       work_hours_total:      {},
       _weekdays:             nil,
-      zone:                  Time.zone.present? Time.zone.name : 'UTC',
+      zone:                  Time.zone.present? ? Time.zone.name : 'UTC',
     }
 
     class << self
