@@ -14,18 +14,18 @@ module BusinessTime
       work_hours:            {},
       work_hours_total:      {},
       _weekdays:             nil,
-      zone:                  'UTC',
+      zone:                  Time.zone.present? Time.zone.name : 'UTC',
     }
 
     class << self
       private
 
       def config
-        Thread.main[:business_time_config] ||= default_config
+        Thread.current[:business_time_config] ||= default_config
       end
 
       def config=(config)
-        Thread.main[:business_time_config] = config
+        Thread.current[:business_time_config] = config
       end
 
       def threadsafe_cattr_accessor(name)
