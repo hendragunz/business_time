@@ -35,13 +35,9 @@ module BusinessTime
         # is work date
         return true if BusinessTime::Config.work_dates.include? day
         # is holiday
-        isholiday = BusinessTime::Config.holidays.each do |holiday|
-          h = Date.parse(holiday[:date])
-          if holiday[:repeat]
-            return false if h.day == day.day and h.month == h.month
-          else
-            return false if h == day.to_date
-          end
+        return false if BusinessTime::Config.holidays.any? do |i|
+          h = Date.parse(i[:date])
+          i[:repeat] ? (h.day == day.day and h.month == h.month) : h == day.to_date
         end
         return Time.weekday?(day)
       end
