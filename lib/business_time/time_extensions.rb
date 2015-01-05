@@ -23,7 +23,7 @@ module BusinessTime
         change_business_time(day,beginning_of_workday.hour,beginning_of_workday.min,beginning_of_workday.sec)
       end
       
-      #def with(policy)
+      def with(policy)
         BusinessTime::Config.with(policy) do
           yield
         end
