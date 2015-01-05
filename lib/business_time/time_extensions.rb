@@ -22,6 +22,12 @@ module BusinessTime
         beginning_of_workday = Time.parse(BusinessTime::Config.beginning_of_workday(day))
         change_business_time(day,beginning_of_workday.hour,beginning_of_workday.min,beginning_of_workday.sec)
       end
+      
+      #def with(policy)
+        BusinessTime::Config.with(policy) do
+          yield
+        end
+      end
 
       # True if this time is on a workday (between 00:00:00 and 23:59:59), even if
       # this time falls outside of normal business hours.
@@ -100,7 +106,8 @@ module BusinessTime
           end
         end
       end
-
+      
+      
       private
 
       def change_business_time time, hour, min=0, sec=0

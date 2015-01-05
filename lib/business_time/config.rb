@@ -14,6 +14,7 @@ module BusinessTime
       work_hours:            {},
       work_hours_total:      {},
       _weekdays:             nil,
+      zone:                  'UTC',
     }
 
     class << self
