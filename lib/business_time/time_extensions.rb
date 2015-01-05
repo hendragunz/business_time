@@ -33,9 +33,7 @@ module BusinessTime
       # this time falls outside of normal business hours.
       def workday?(day)
         # is work date
-        BusinessTime::Config.work_dates.each do |d|
-          return true if Date.parse(d) == day.to_date
-        end
+        return true if BusinessTime::Config.work_dates.include? day
         # is holiday
         isholiday = BusinessTime::Config.holidays.each do |holiday|
           h = Date.parse(holiday[:date])
