@@ -67,6 +67,9 @@ module BusinessTime
     # Example:
     #    {:mon => ["9:00","17:00"],:tue => ["9:00","17:00"].....}
     threadsafe_cattr_accessor :work_hours
+    
+    # specify Time.zone
+    threadsafe_cattr_accessor :zone
 
     # total work hours for a day. Never set, always calculated.
     threadsafe_cattr_accessor :work_hours_total
