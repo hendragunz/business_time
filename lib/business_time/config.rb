@@ -14,7 +14,6 @@ module BusinessTime
       work_hours:            {},
       work_hours_total:      {},
       _weekdays:             nil,
-      zone:                  Time.zone.present? ? Time.zone.name : 'UTC',
       work_dates:            [],
     }
 
@@ -70,9 +69,6 @@ module BusinessTime
     #    {:mon => ["9:00","17:00"],:tue => ["9:00","17:00"].....}
     threadsafe_cattr_accessor :work_hours
     
-    # specify Time.zone
-    threadsafe_cattr_accessor :zone
-
     # specify work date
     threadsafe_cattr_accessor :work_dates
 

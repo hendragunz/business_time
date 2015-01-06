@@ -114,7 +114,11 @@ module BusinessTime
       private
 
       def change_business_time time, hour, min=0, sec=0
-        time.in_time_zone(BusinessTime::Config.zone).change(:hour => hour, :min => min, :sec => sec)
+        if Time.zone
+          time.in_time_zone(Time.zone).change(:hour => hour, :min => min, :sec => sec)
+        else
+          time.change(:hour => hour, :min => min, :sec => sec)
+        end
       end
     end
 
