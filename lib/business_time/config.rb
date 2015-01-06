@@ -135,7 +135,7 @@ module BusinessTime
         end
 
         (config["holidays"] || []).each do |holiday|
-          holidays << {date: holiday, name: 'Holiday', repeat: true}
+          holidays << Time.parse(holiday)
         end
       end
 
